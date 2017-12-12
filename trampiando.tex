@@ -1,16 +1,7 @@
-﻿# Plantilla-TRAMPIANDO
-----
-Plantilla LaTeX para la Revista Trampiando
-
-Esta versión permite el uso de archivos de bibliografía `.bib`
-
-----
-## Estructura de la plantilla base (trampiando.tex)
-
-```latex
 \documentclass[11pt, twoside, letterpaper, openright, final]{book}
 \usepackage{trampiando}
 \usepackage{emptypage}
+\usepackage{natbib}
 
 \nrorevista{X}
 \anocalendario{YYYY}
@@ -37,7 +28,6 @@ Esta versión permite el uso de archivos de bibliografía `.bib`
 \pagestyle{fancy}
 \fancychapterstyle
 
-
 \chapter{Bloque1}\BgThispage
 \blankpage\blankpage
 \include{art1}
@@ -46,23 +36,11 @@ Esta versión permite el uso de archivos de bibliografía `.bib`
 \blankpage\blankpage
 \include{art2}
 
+%\chapter{Bloque3}
+%\BgThispage
+%\blankpage\blankpage
+
+
 \pagestyle{plain}
 \hojacontraportada
 \end{document}
-
-```
-
-----
-## Nota
-Para que se tomen las bibliografías de forma separada al final de cada artículo se debe compilar un archivo de bibliografía por cada artículo. Ejemplo: `bibtex art1.tex`
-
-----
-## Ejemplos
-
-#### Revista TRAMPIANDO N°5.
-![demo.png](imagenes/demo.png "Vista previa")
-
-
-
-
-

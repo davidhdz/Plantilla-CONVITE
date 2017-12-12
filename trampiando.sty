@@ -1,0 +1,351 @@
+%%=================================================================================
+%% 
+%% Copyright 2017 David A. Hernández Aponte, Fundacion  
+%% Centro Nacional de Desarrollo e Investigacion en Tecnologias Libres (CENDITEL)
+%%
+%% This program may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in 
+%% http://www.latex-project.org/lppl.txt
+%%
+%%=================================================================================
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{trampiando}[2017/10/26 v1.0 Estilo para la Revista Trampiando]
+
+\sloppy
+\RequirePackage{chapterbib}
+%\RequirePackage[sectionbib,natbibapa]{apacite}
+\RequirePackage[sectionbib]{natbib}
+\RequirePackage[none]{hyphenat}
+\RequirePackage[english,spanish,mexico]{babel} 
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[hyphens]{url}
+\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{textcomp}
+\RequirePackage{float}
+\RequirePackage{graphicx}
+\RequirePackage[top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage{helvet}
+\RequirePackage{etoolbox}
+\RequirePackage{wrapfig}
+\RequirePackage{chngcntr}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\RequirePackage{enumitem}
+\RequirePackage{gensymb}
+\RequirePackage{lastpage}
+\RequirePackage{booktabs}
+\RequirePackage[pages=some]{background}
+\RequirePackage[stable]{footmisc}
+\RequirePackage{tocloft}
+\RequirePackage{tikz}
+\RequirePackage{tcolorbox}
+\setlistdepth{20}
+\RequirePackage{hyperref}
+\hypersetup{
+ colorlinks=true, 
+ linkcolor = rojotrampiando,
+ urlcolor= rojotrampiando,
+ citecolor= coolblack
+}
+
+
+% ============================= % Configuraciones % ============================= %
+\graphicspath{{imagenes/}}						% Ruta de la carpeta de imagenes
+\AtBeginDocument{\AtBeginShipoutNext		    % Elimina páginas en blanco al inicio
+	{\AtBeginShipoutDiscard}}
+\setcounter{tocdepth}{1}                         % Muestra capítulos y secciones en la TdC
+
+
+\captionsetup[table]{
+  justification=justified,
+  singlelinecheck=false,%%%%%%% a single line is centered by default
+  skip = \medskipamount
+}
+
+\newcommand{\fclic}{\fontfamily{qag}\fontsize{8}{8}\selectfont} %Fuente CLIC
+\renewcommand{\familydefault}{\sfdefault}		% tipografía de la revista
+
+\renewcommand{\labelitemi}{$\bullet$}			% Símbolo de listas
+
+
+
+% ================================= % Colores % ================================= %
+\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+\definecolor{clicrojooscuro}{HTML}{FF3300}
+\definecolor{clicamarillooscuro}{HTML}{FF9801}
+\definecolor{clicazul}{HTML}{01669A}
+\definecolor{rojotrampiando}{HTML}{AE0506}
+
+
+% ============================= % Marca de agua % =============================== %
+\backgroundsetup{
+scale=1,
+opacity=1,
+angle=0,
+contents={\includegraphics[width=\paperwidth,height=\paperheight]{imagenes/marcaagua.png}}
+}
+
+
+% ========================== % Cabecera y pie % ================================= %
+\usetikzlibrary{calc}
+\fancyhf{} 
+
+\fancyhead[LE]{%
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[rojotrampiando!75] (current page.north west) rectangle ($(current page.north east)+(0,-1in)$);
+    \node[anchor=north west, text=white, font=\Large\bfseries, minimum size=1in, inner xsep=38mm] at (current page.north west) {TRAMPIANDO {\footnotesize Nro. \@nrorevista \ -- \@anocalendario}};
+\end{tikzpicture}
+}
+
+\fancyhead[RO]{%
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[rojotrampiando!75] (current page.north west) rectangle ($(current page.north east)+(0,-1in)$);
+    \node[anchor=north east, text=white, font=\bfseries, minimum size=1in, inner xsep=38mm] at (current page.north east) {\@title};
+\end{tikzpicture}
+}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand*\circled[1]{\tikz[baseline]{\node[color=rojotrampiando!75,fill=coolblack,shape=circle,draw,inner sep=1pt] (char) {#1};}}
+
+\setlength\headheight{71pt}
+
+\fancyfoot[LE]{
+    \begin{tikzpicture}[overlay, remember picture]%
+    \fill[rojotrampiando!75] (current page.south west) rectangle ($(current page.south east)+(0,.5in)$);
+    \node[anchor=south west, text=white, font=\large, minimum size=.50in, inner xsep=38mm] at (current page.south west) {\thepage};
+\end{tikzpicture}
+}
+
+\fancyfoot[RO]{
+    \begin{tikzpicture}[overlay, remember picture]%
+    \fill[rojotrampiando!75] (current page.south west) rectangle ($(current page.south east)+(0,.5in)$);
+    \node[anchor=south east, text=white, font=\large, minimum size=.50in, inner xsep=38mm] at (current page.south east) {\thepage};
+\end{tikzpicture}
+}
+
+% =============================== % Capítulos % ================================= %
+\newcommand*{\fancychapterstyle}{  				% Formato de título los capítulos
+    \newpage
+	\hyphenpenalty=10000
+	\titleformat{\chapter}[display]
+	{\thispagestyle{empty}\color{black}\normalfont\huge\bfseries\filright\fclic}{}{20pt}{\Huge}
+}
+
+\let\latexl@chapter\l@chapter
+\def\l@chapter#1#2{\begingroup\let\numberline\@gobble\latexl@chapter{#1}{#2}\endgroup}
+
+
+% ================================= % Sección % ================================= %
+\renewcommand{\thesection}{\arabic{section}}	% Numeración de las secciones
+\renewcommand{\thesubsection}{}					% Numeración de las subsecciones
+
+\titleformat{\section}[block]{\color{black}		% Formato de título de cada artículo
+	\LARGE\bfseries\filright}{}{0em}{}
+
+\titleformat{\subsection}[block]{\noindent\color{black}		% Formato de título de cada subsección
+	\large\bfseries}{}{0em}{}
+
+\def\@seccntformat#1{\csname #1ignore			% Oculta la numeración en el título
+	\expandafter\endcsname\csname the#1
+	\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+
+\let\latexl@section\l@section
+\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
+
+
+% ======================== % Reinicio de numeraciones % ========================= %
+\counterwithin{figure}{section}					% Reinicia numeración para figuras
+\counterwithin{table}{section}					% Reinicia numeración para tablas
+\counterwithin{footnote}{section}				% Reinicia numeración para notas al pie
+\counterwithin{equation}{section}				% Reinicia numeración para ecuaciones
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\theequation}{\arabic{equation}}
+
+
+% ============================== % Bibliografía % =============================== %
+\patchcmd{\thebibliography}{\chapter*}{\subsection*}{}{}		% Elimina el salto de página
+
+
+% ================================= % Macros % ================================== %
+\def\nrorevista#1{\gdef\@nrorevista{#1}}
+\def\isbn#1{\gdef\@isbn{#1}}
+\def\deplegal#1{\gdef\@deplegal{#1}}
+\def\anocalendario#1{\gdef\@anocalendario{#1}}
+\def\editorial#1{\gdef\@editorial{#1}}
+\def\autoreditorial#1{\gdef\@autoreditorial{#1}}
+\def\tablacontenido#1{\gdef\@tablacontenido{#1}}
+
+\def\@nrorevista{}
+\def\@isbn{}
+\def\@deplegal{}
+\def\@anocalendario{}
+\def\@autoreditorial{}
+\def\@tablacontenido{}
+
+
+% ================================ % Margenes % ================================= %
+\topmargin  -2.2cm
+\footskip    2.0cm
+
+
+% ================================ % Portada % ================================= %
+\def\hojaportada{
+	\thispagestyle{empty}
+	\pagenumbering{gobble}
+	\newgeometry{top=0cm, bottom=0cm, right=0cm, left=0cm}
+	\noindent
+	\includegraphics[width=\paperwidth,height=\paperheight]{portada}
+}
+
+% ============================= % Contraportada % =============================== %
+\def\hojacontraportada{
+	\blankpage
+	\cleartoleftpage
+	\pagenumbering{gobble}
+	\newgeometry{top=0cm, bottom=0cm, right=0cm, left=-0cm}
+
+    \vspace*{\fill}
+	\begin{center}
+		\includegraphics[scale=.25]{logocenditel}
+	\end{center}
+	\vspace*{\fill}
+	
+	\newpage 
+	\noindent
+	\begin{figure}[H] 
+	\includegraphics[width=\paperwidth,height=\paperheight]{contraportada}
+	\end{figure}
+}
+
+
+% ============================ % Página en blanco % ============================ %
+\def\blankpage{
+    \null
+    \thispagestyle{empty}
+    \newpage
+}
+
+% ============================ % Página izquierda % ============================ %
+
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \pagestyle{plain}
+  \pagenumbering{gobble}
+  \ifodd\value{page}\clearpage\newpage\fi
+}
+
+% =============================== % Licencia % ================================= %
+\def\hojalicencia{
+	\pagestyle{plain}
+	\pagenumbering{gobble}
+	\restoregeometry
+	\BgThispage
+
+\begin{tikzpicture}[rounded corners=15pt,remember picture, overlay]%
+    \fill[rojotrampiando!20] (-1,-16.9) rectangle (5.6,-6.3);
+\end{tikzpicture}
+
+	\begin{footnotesize}
+		
+	{\fontfamily{qag}\selectfont
+	
+	{\setlength{\parindent}{0cm}
+\begin{center}
+	\includegraphics[scale=.15]{imagenes/logocenditel.png} 	
+
+	\vskip.5cm	
+	
+	Derecho de Autor \copyright \ \@anocalendario \ Fundación Centro Nacional de Desarrollo e\\ Investigación en Tecnologías Libres (CENDITEL)
+
+	Ministerio del Poder Popular para Educación Universitaria, Ciencia y Tecnología
+
+	República Bolivariana de Venezuela
+	
+	Algunos Derechos Reservados -- Copyleft
+\end{center}
+
+
+	\vskip.5cm
+    \input{licencia}
+	\vskip3.2cm
+	
+	\begin{center}
+	\textbf{Proyecto CONVITE}
+	
+	{\small \url{http://convite.cenditel.gob.ve/}}
+
+	\vskip.5cm
+
+	\color{rojotrampiando} \textbf{Serie Trampiando. Nro \@nrorevista \ (\@anocalendario)}
+
+	ISBN No. \ \@isbn
+
+	Depósito Legal No. \ \@deplegal
+
+	
+	\end{center}
+	}
+	\pagebreak 
+	}
+	\end{footnotesize}
+}
+
+
+% ============================= % Reconocimiento % =============================== %
+\def\hojapreconocimiento{
+	\newpage
+	\pagestyle{fancy}
+	\pagenumbering{gobble}
+
+	\begin{center}
+		\begin{flushleft}
+			{\Huge 	\textbf{Reconocimiento}}
+		\end{flushleft}
+		\vskip1.5cm
+		\input{reconocimiento}
+	\end{center}
+}
+
+
+% =============================== % Editorial % ================================ %
+\def\hojaeditorial{
+	\newpage
+	\pagestyle{fancy}
+	
+	\input{editorial}
+
+	\begin{flushright}
+	\@autoreditorial\\
+	Comité Editorial \textbf{Trampiando}
+	\end{flushright}
+}
+
+
+
+% =============================== % Contenido % ================================ %
+\def\tablacontenido{
+	\thispagestyle{empty}
+	\pagenumbering{gobble}
+
+\begin{tikzpicture}[rounded corners=15pt,remember picture, overlay]%
+    \fill[rojotrampiando!20] (12.5,-22.5) rectangle (15.2,1);
+\end{tikzpicture}
+
+	\tableofcontents
+}
+
+
+\endinput
