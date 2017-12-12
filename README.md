@@ -4,6 +4,8 @@ Plantilla LaTeX para la Revista Trampiando
 
 Esta versión permite el uso de archivos de bibliografía `.bib`
 
+Esta plantilla está basada en la plantilla utilizada para la [Revista CLIC](https://github.com/davidhdz/Plantilla-CLIC) 
+
 ----
 ## Estructura de la plantilla base (trampiando.tex)
 
